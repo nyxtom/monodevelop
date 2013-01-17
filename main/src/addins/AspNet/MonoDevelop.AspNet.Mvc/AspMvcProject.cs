@@ -127,6 +127,70 @@ namespace MonoDevelop.AspNet.Mvc
 				}
 			}
 		}
+		
+		public static WebSubtype DetermineWebSubtype (string fileName)
+		{
+			string extension = System.IO.Path.GetExtension (fileName);
+			if (extension == null)
+				return WebSubtype.None;
+			extension = extension.ToLower ().TrimStart ('.');
+			
+			//NOTE: No way to identify WebSubtype.Code from here
+			//use the instance method for that
+			switch (extension)
+			{
+			case "aspx":
+				return WebSubtype.WebForm;
+			case "master":
+				return WebSubtype.MasterPage;
+			case "ashx":
+				return WebSubtype.WebHandler;
+			case "ascx":
+				return WebSubtype.WebControl;
+			case "asmx":
+				return WebSubtype.WebService;
+			case "asax":
+				return WebSubtype.Global;
+			case "cshtml":
+				return WebSubtype.Html;
+			case "gif":
+			case "png":
+			case "jpg":
+				return WebSubtype.WebImage;
+			case "skin":
+				return WebSubtype.WebSkin;
+			case "config":
+				return WebSubtype.Config;
+			case "browser":
+				return WebSubtype.BrowserDefinition;
+			case "axd":
+				return WebSubtype.Axd;
+			case "sitemap":
+				return WebSubtype.Sitemap;
+			case "css":
+				return WebSubtype.Css;
+			case "xhtml":
+			case "html":
+			case "htm":
+				return WebSubtype.Html;
+			case "js":
+				return WebSubtype.JavaScript;
+			default:
+				return WebSubtype.None;
+			}
+		}
+
+		public override string GetDefaultBuildAction (string fileName)
+		{
+			
+			WebSubtype type = DetermineWebSubtype (fileName);
+			if (type == WebSubtype.Code)
+				return BuildAction.Compile;
+			if (type != WebSubtype.None)
+				return BuildAction.Content;
+			else
+				return base.GetDefaultBuildAction (fileName);
+		}
 	}
 
 	public class AspMvc1Project : AspMvcProject
