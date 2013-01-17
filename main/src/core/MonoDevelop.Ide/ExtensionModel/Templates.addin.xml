@@ -26,6 +26,7 @@
 	<FileTemplate id = "EmptyInterface" resource = "EmptyInterface.xft.xml"/>
 	<FileTemplate id = "EmptyStruct" resource = "EmptyStruct.xft.xml"/>
 	<FileTemplate id = "EmptyHTMLFile" resource = "EmptyHTMLFile.xft.xml"/>
+    <FileTemplate id = "EmptyJSFile" resource = "EmptyJSFile.xft.xml"/>
 	<FileTemplate id = "AppConfigFile" resource = "AppConfigFile.xft.xml"/>
 	<FileTemplate id = "EmptyResourceFile" resource = "EmptyResourceFile.xft.xml"/>
 	<FileTemplate id = "EmptyTextFile" resource = "EmptyTextFile.xft.xml"/>
